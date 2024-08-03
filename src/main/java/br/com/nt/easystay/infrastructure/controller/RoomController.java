@@ -32,4 +32,9 @@ public class RoomController {
         return roomService.findAvailableRoom();
     }
 
+    @GetMapping("/{id}")
+    public RoomResponse findById(@RequestParam Long id) {
+        return roomService.findById(id);
+    }
+
 }

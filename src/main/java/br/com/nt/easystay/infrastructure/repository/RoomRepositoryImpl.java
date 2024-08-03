@@ -1,5 +1,6 @@
 package br.com.nt.easystay.infrastructure.repository;
 
+import br.com.nt.easystay.domain.exception.RoomNotFoundException;
 import br.com.nt.easystay.domain.model.Room;
 import br.com.nt.easystay.domain.repository.RoomRepository;
 import jakarta.persistence.EntityManager;
@@ -9,19 +10,26 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Transactional
 @Repository
 public class RoomRepositoryImpl implements RoomRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    private static final String ROOM_NOT_FOUND = "Room not found with id ";
+
 
     @Override
     public Room findById(Long id) {
-        return entityManager.find(Room.class, id);
+        final Room room = entityManager.find(Room.class, id);
+        if (room != null) {
+            return room;
+        } else {
+            throw new RoomNotFoundException(ROOM_NOT_FOUND + id);
+        }
     }
 
-    @Transactional
     @Override
     public void save(Room room) {
         if (room.getId() == null) {
@@ -46,4 +54,21 @@ public class RoomRepositoryImpl implements RoomRepository {
                 .createQuery("SELECT r FROM Room r WHERE r.available = true", Room.class)
                 .getResultList();
     }
+
+
+    @Override
+    public void delete(Long id) {
+        final Room room = findById(id);
+        entityManager.remove(room);
+    }
+
+    @Override
+    public void update(Long id, boolean status) {
+        final Room room = findById(id);
+        room.setAvailable(status);
+        entityManager.merge(room);
+    }
 }
+
+
+

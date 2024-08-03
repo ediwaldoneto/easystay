@@ -15,4 +15,8 @@ public interface RoomService {
 
     List<RoomResponse> findAvailableRoom();
 
+    void delete(final Long id);
+
+    void update(final Long id, final boolean status);
+
 }

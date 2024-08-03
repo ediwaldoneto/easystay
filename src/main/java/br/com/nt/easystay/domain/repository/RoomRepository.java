@@ -14,4 +14,8 @@ public interface RoomRepository {
 
     List<Room> findAvailableRoom();
 
+    void delete(final Long id);
+
+    void update(final Long id, final boolean status);
+
 }
