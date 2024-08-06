@@ -11,4 +11,10 @@ public interface ReservationRepository {
     void save(final Reservation reservation);
 
     List<Reservation> findAll();
+
+    void delete(final Long id);
+
+    void update(final Reservation reservation);
+
+
 }

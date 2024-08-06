@@ -1,7 +1,7 @@
-package br.com.nt.easystay.infrastructure.mapper;
+package br.com.nt.easystay.infrastructure.mapper.request;
 
 import br.com.nt.easystay.application.dto.RoomDTO;
-import br.com.nt.easystay.infrastructure.response.RoomRequest;
+import br.com.nt.easystay.infrastructure.request.RoomRequest;
 import org.springframework.stereotype.Component;
 
 @Component

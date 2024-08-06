@@ -4,10 +4,10 @@ import br.com.nt.easystay.application.mapper.RoomMapper;
 import br.com.nt.easystay.domain.model.Room;
 import br.com.nt.easystay.domain.repository.RoomRepository;
 import br.com.nt.easystay.domain.service.RoomService;
-import br.com.nt.easystay.infrastructure.mapper.RoomRequestMapper;
-import br.com.nt.easystay.infrastructure.mapper.RoomResponseMapper;
-import br.com.nt.easystay.infrastructure.request.RoomResponse;
-import br.com.nt.easystay.infrastructure.response.RoomRequest;
+import br.com.nt.easystay.infrastructure.mapper.request.RoomRequestMapper;
+import br.com.nt.easystay.infrastructure.mapper.response.RoomResponseMapper;
+import br.com.nt.easystay.infrastructure.response.RoomResponse;
+import br.com.nt.easystay.infrastructure.request.RoomRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package br.com.nt.easystay.infrastructure.request;
+package br.com.nt.easystay.infrastructure.response;
 
 
 import lombok.Builder;

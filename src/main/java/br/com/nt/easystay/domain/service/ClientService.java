@@ -1,10 +1,20 @@
 package br.com.nt.easystay.domain.service;
 
 import br.com.nt.easystay.domain.model.Client;
+import br.com.nt.easystay.infrastructure.response.ClientResponse;
+
+import java.util.List;
 
 public interface ClientService {
 
-    public Client findById(final Long id);
+    ClientResponse findById(final String id);
 
-    public void save(final Client client);
+    String save(final Client client);
+
+    List<ClientResponse> findAll();
+
+    ClientResponse findByCpf(final String cpf);
+
+    boolean exist(final String cpf);
+
 }

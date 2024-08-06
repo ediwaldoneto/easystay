@@ -8,7 +8,11 @@ public interface ClientRepository {
 
     Client findById(final String id);
 
-    void save(final Client client);
+    String save(final Client client);
 
     List<Client> findAll();
+
+    Client findByCpf(String cpf);
+
+    boolean exist(String cpf);
 }

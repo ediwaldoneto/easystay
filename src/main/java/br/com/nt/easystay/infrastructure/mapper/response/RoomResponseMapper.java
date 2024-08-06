@@ -1,8 +1,8 @@
-package br.com.nt.easystay.infrastructure.mapper;
+package br.com.nt.easystay.infrastructure.mapper.response;
 
 
 import br.com.nt.easystay.application.dto.RoomDTO;
-import br.com.nt.easystay.infrastructure.request.RoomResponse;
+import br.com.nt.easystay.infrastructure.response.RoomResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +17,15 @@ public class RoomResponseMapper {
                 .number(roomDTO.getNumber())
                 .roomType(roomDTO.getRoomType())
                 .available(roomDTO.isAvailable())
+                .build();
+    }
+
+    public static RoomDTO toRoomDTO(RoomResponse roomResponse) {
+        return RoomDTO.builder()
+                .id(roomResponse.getId())
+                .number(roomResponse.getNumber())
+                .roomType(roomResponse.getRoomType())
+                .available(roomResponse.isAvailable())
                 .build();
     }
 }

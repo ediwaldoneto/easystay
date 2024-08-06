@@ -1,4 +1,4 @@
-package br.com.nt.easystay.infrastructure.response;
+package br.com.nt.easystay.infrastructure.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
