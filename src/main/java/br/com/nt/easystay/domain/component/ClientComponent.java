@@ -4,7 +4,6 @@ import br.com.nt.easystay.application.dto.ClientDTO;
 import br.com.nt.easystay.domain.exception.BusinessException;
 import br.com.nt.easystay.domain.service.ClientService;
 import br.com.nt.easystay.infrastructure.mapper.request.ClientRequestMapper;
-import br.com.nt.easystay.infrastructure.request.ClientRequest;
 import org.springframework.stereotype.Component;
 
 @Component
