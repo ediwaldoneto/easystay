@@ -38,7 +38,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean exist(String cpf) {
-        return clientRepository.exist(cpf);
+    public boolean existCpf(String cpf) {
+        return clientRepository.existCpf(cpf);
+    }
+
+    @Override
+    public boolean existEmail(String email) {
+        return  clientRepository.existEmail(email);
     }
 }

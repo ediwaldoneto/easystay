@@ -15,6 +15,7 @@ public interface ClientService {
 
     ClientResponse findByCpf(final String cpf);
 
-    boolean exist(final String cpf);
+    boolean existCpf(final String cpf);
 
+    boolean existEmail(final String email);
 }

@@ -14,5 +14,7 @@ public interface ClientRepository {
 
     Client findByCpf(String cpf);
 
-    boolean exist(String cpf);
+    boolean existCpf(String cpf);
+
+    boolean existEmail(String email);
 }

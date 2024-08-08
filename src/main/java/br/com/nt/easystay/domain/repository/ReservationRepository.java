@@ -16,5 +16,7 @@ public interface ReservationRepository {
 
     void update(final Reservation reservation);
 
+    Reservation findByReservationNumber(final String reservationNumber);
 
+    boolean existsByReservationNumber(String reservationNumber);
 }

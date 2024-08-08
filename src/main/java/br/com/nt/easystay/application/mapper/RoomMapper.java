@@ -24,9 +24,9 @@ public class RoomMapper {
 
     public static Room toEntity(RoomDTO roomDTO) {
         Room room = new Room();
-        room.setNumber(room.getNumber());
+        room.setNumber(roomDTO.getNumber());
         room.setRoomType(RoomType.fromString(roomDTO.getRoomType()));
-        room.setAvailable(room.isAvailable());
+        room.setAvailable(roomDTO.isAvailable());
         return room;
     }
 }

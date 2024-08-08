@@ -1,6 +1,7 @@
 package br.com.nt.easystay.domain.component;
 
 
+import br.com.nt.easystay.domain.exception.RoomNotFoundException;
 import br.com.nt.easystay.domain.service.RoomService;
 import br.com.nt.easystay.infrastructure.response.RoomResponse;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,14 @@ public class RoomComponent {
         this.roomService = roomService;
     }
 
-    public RoomResponse searchForRoom(final Long id) {
+    public RoomResponse searchForAvailableRoom(final Long id) {
+        final RoomResponse room = roomService.findById(id);
 
-        return roomService.findById(id);
+        if (room != null && room.isAvailable()) {
+            return room;
+        } else {
+            throw new RoomNotFoundException("room not available");
+        }
     }
 }
+// fazer um reserva

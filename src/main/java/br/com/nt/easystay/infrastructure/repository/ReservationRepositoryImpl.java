@@ -5,6 +5,7 @@ import br.com.nt.easystay.domain.model.Reservation;
 import br.com.nt.easystay.domain.repository.ReservationRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -54,5 +55,23 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public void update(Reservation reservation) {
         findById(reservation.getId());
         entityManager.merge(reservation);
+    }
+
+    @Override
+    public Reservation findByReservationNumber(String reservationNumber) {
+        final Reservation reservation = entityManager.find(Reservation.class, reservationNumber);
+        if (reservation != null) {
+            return reservation;
+        } else {
+            throw new ReservationNotFound("Reservation not found with reservationNumber " + reservationNumber);
+        }
+    }
+
+    @Override
+    public boolean existsByReservationNumber(String reservationNumber) {
+        Query query = entityManager.createQuery("SELECT COUNT(r) FROM Reservation r WHERE r.reservationNumber = :reservationNumber");
+        query.setParameter("reservationNumber", reservationNumber);
+        Long count = (Long) query.getSingleResult();
+        return count > 0;
     }
 }

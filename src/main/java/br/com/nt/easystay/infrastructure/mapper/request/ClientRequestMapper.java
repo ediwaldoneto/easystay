@@ -12,12 +12,12 @@ public class ClientRequestMapper {
 
     public static ClientDTO toDTO(ClientRequest request) {
 
-       return ClientDTO.builder()
-               .name(request.getName())
-               .email(request.getEmail())
-               .phoneNumber(request.getPhoneNumber())
-               .cpf(request.getCpf())
-               .build();
+        return ClientDTO.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .cpf(request.getCpf())
+                .build();
     }
 
     public static Client toEntity(ClientDTO dto) {

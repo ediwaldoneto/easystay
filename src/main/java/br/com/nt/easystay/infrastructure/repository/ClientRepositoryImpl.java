@@ -61,9 +61,17 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public boolean exist(String cpf) {
+    public boolean existCpf(String cpf) {
         Query query = entityManager.createQuery("SELECT COUNT(c) FROM Client c WHERE c.cpf = :cpf");
         query.setParameter("cpf", cpf);
+        Long count = (Long) query.getSingleResult();
+        return count > 0;
+    }
+
+    @Override
+    public boolean existEmail(String email) {
+        Query query = entityManager.createQuery("SELECT COUNT(c) FROM Client c WHERE c.email = :email");
+        query.setParameter("email", email);
         Long count = (Long) query.getSingleResult();
         return count > 0;
     }
