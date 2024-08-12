@@ -24,6 +24,12 @@ public class Payment {
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
+    @Column(name = "cardNumber")
+    private String cardNumber;
+    @Column(name = "cardExpiry")
+    private String cardExpiry;
+    @Column(name = "cardCvc")
+    private String cardCvc;
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")

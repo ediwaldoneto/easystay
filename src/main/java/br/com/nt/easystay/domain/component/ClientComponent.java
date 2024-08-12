@@ -20,9 +20,11 @@ public class ClientComponent {
     @Transactional
     public String validateAndSaveClient(ClientDTO clientDTO) {
 
-        if (clientService.existCpf(clientDTO.getCpf())) {
-            throw new BusinessException("CPF already registered", HttpStatus.CONFLICT);
+        final String cpf = clientService.findClientIdByCpf(clientDTO.getCpf());
+        if (cpf != null) {
+            return cpf;
         }
+
         if (clientService.existCpf(clientDTO.getEmail())) {
             throw new BusinessException("Email already registered", HttpStatus.CONFLICT);
         }

@@ -3,10 +3,7 @@ package br.com.nt.easystay.infrastructure.repository;
 import br.com.nt.easystay.domain.exception.ClientNotFoundException;
 import br.com.nt.easystay.domain.model.Client;
 import br.com.nt.easystay.domain.repository.ClientRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -66,6 +63,17 @@ public class ClientRepositoryImpl implements ClientRepository {
         query.setParameter("cpf", cpf);
         Long count = (Long) query.getSingleResult();
         return count > 0;
+    }
+
+    @Override
+    public String findClientIdByCpf(String cpf) {
+        Query query = entityManager.createQuery("SELECT c.id FROM Client c WHERE c.cpf = :cpf");
+        query.setParameter("cpf", cpf);
+        try {
+            return (String) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String save(Client client) {
-       return clientRepository.save(client);
+        return clientRepository.save(client);
     }
 
     @Override
@@ -43,7 +43,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public String findClientIdByCpf(String cpf) {
+        return clientRepository.findClientIdByCpf(cpf);
+    }
+
+    @Override
     public boolean existEmail(String email) {
-        return  clientRepository.existEmail(email);
+        return clientRepository.existEmail(email);
     }
 }

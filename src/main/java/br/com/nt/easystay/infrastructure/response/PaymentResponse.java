@@ -1,17 +1,19 @@
-package br.com.nt.easystay.application.dto;
+package br.com.nt.easystay.infrastructure.response;
 
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
-public class PaymentDTO {
+public class PaymentResponse {
 
     private Long id;
     private String paymentMethod;
-    private Double amount;
+    private BigDecimal amount;
     private String cardNumber;
     private String cardExpiry;
     private String cardCvc;
-    private ReservationDTO reservation;
+    private ReservationResponse reservation;
 }

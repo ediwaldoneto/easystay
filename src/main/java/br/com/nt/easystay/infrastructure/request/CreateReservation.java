@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
 
 
@@ -14,7 +15,8 @@ import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 @Data
-public class ReservationRequest {
+@Builder
+public class CreateReservation {
 
     @NotNull(message = "Check-in date is mandatory")
     @Future(message = "Check-in date must be in the future")

@@ -4,14 +4,14 @@ import br.com.nt.easystay.application.dto.ClientDTO;
 import br.com.nt.easystay.application.dto.PaymentDTO;
 import br.com.nt.easystay.application.dto.ReservationDTO;
 import br.com.nt.easystay.domain.model.*;
-import br.com.nt.easystay.infrastructure.request.ReservationRequest;
+import br.com.nt.easystay.infrastructure.request.CreateReservation;
 
 public class ReservationRequestMapper {
 
     private ReservationRequestMapper() {
     }
 
-    public static ReservationDTO toReservationDTO(ReservationRequest request) {
+    public static ReservationDTO toReservationDTO(CreateReservation request) {
         final ClientDTO client = ClientDTO.builder()
                 .name(request.getClient().getName())
                 .email(request.getClient().getEmail())
@@ -58,6 +58,7 @@ public class ReservationRequestMapper {
         reservation.setCheckOutDate(reservationDTO.getCheckOutDate());
         reservation.setStatus(ReservationStatus.fromString(reservationDTO.getStatus()));
         reservation.setPaymentTiming(PaymentTiming.fromString(reservationDTO.getPaymentTiming()));
+        reservation.setReservationNumber(reservationDTO.getReservationNumber());
         reservation.setClient(client);
         reservation.setRoom(room);
 

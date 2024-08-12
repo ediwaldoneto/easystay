@@ -19,4 +19,6 @@ public interface ReservationRepository {
     Reservation findByReservationNumber(final String reservationNumber);
 
     boolean existsByReservationNumber(String reservationNumber);
+
+    Reservation findReservationByCpfOrReservationNumber(final String cpf, final String reservationNumber);
 }

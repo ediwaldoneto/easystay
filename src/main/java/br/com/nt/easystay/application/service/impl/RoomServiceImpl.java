@@ -6,8 +6,8 @@ import br.com.nt.easystay.domain.repository.RoomRepository;
 import br.com.nt.easystay.domain.service.RoomService;
 import br.com.nt.easystay.infrastructure.mapper.request.RoomRequestMapper;
 import br.com.nt.easystay.infrastructure.mapper.response.RoomResponseMapper;
-import br.com.nt.easystay.infrastructure.response.RoomResponse;
 import br.com.nt.easystay.infrastructure.request.RoomRequest;
+import br.com.nt.easystay.infrastructure.response.RoomResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +28,11 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void save(RoomRequest request) {
         Room room = RoomMapper.toEntity(RoomRequestMapper.toRoomDTO(request));
+        roomRepository.save(room);
+    }
+
+    @Override
+    public void save(Room room) {
         roomRepository.save(room);
     }
 

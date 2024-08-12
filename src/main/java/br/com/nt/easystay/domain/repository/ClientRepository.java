@@ -16,5 +16,7 @@ public interface ClientRepository {
 
     boolean existCpf(String cpf);
 
+    String findClientIdByCpf(String cpf);
+
     boolean existEmail(String email);
 }

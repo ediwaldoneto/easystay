@@ -3,9 +3,7 @@ package br.com.nt.easystay.infrastructure.repository;
 import br.com.nt.easystay.domain.exception.ReservationNotFound;
 import br.com.nt.easystay.domain.model.Reservation;
 import br.com.nt.easystay.domain.repository.ReservationRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -73,5 +71,41 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         query.setParameter("reservationNumber", reservationNumber);
         Long count = (Long) query.getSingleResult();
         return count > 0;
+    }
+
+    @Override
+    public Reservation findReservationByCpfOrReservationNumber(String cpf, String reservationNumber) {
+        StringBuilder queryBuilder = new StringBuilder("""
+                 SELECT r
+                 FROM Reservation r
+                 JOIN FETCH r.client c
+                 JOIN FETCH r.room rm
+                 WHERE 1 = 1
+                """);
+
+        if (reservationNumber != null && !reservationNumber.isEmpty()) {
+            queryBuilder.append(" AND r.reservationNumber = :reservationNumber");
+        }
+
+        if (cpf != null && !cpf.isEmpty()) {
+            queryBuilder.append(" AND c.cpf = :cpf");
+        }
+
+        TypedQuery<Reservation> query = entityManager.createQuery(queryBuilder.toString(), Reservation.class);
+
+        if (reservationNumber != null && !reservationNumber.isEmpty()) {
+            query.setParameter("reservationNumber", reservationNumber);
+        }
+
+        if (cpf != null && !cpf.isEmpty()) {
+            query.setParameter("cpf", cpf);
+        }
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new ReservationNotFound("reservation not found");
+        }
+
     }
 }

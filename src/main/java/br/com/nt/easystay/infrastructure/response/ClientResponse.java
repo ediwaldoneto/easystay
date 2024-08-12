@@ -11,4 +11,5 @@ public class ClientResponse {
     private String name;
     private String email;
     private String phoneNumber;
+    private String cpf;
 }
