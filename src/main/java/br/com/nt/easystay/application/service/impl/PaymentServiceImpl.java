@@ -1,6 +1,5 @@
 package br.com.nt.easystay.application.service.impl;
 
-import br.com.nt.easystay.application.dto.PaymentDTO;
 import br.com.nt.easystay.application.mapper.PaymentMapper;
 import br.com.nt.easystay.domain.model.Payment;
 import br.com.nt.easystay.domain.repository.PaymentRepository;
