@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private String id;
     @Column(name = "reservation_number", unique = true, nullable = false)
     private String reservationNumber;
     @Column(name = "check_in")
@@ -34,7 +33,7 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_timing")
     private PaymentTiming paymentTiming;
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_id", nullable = true)
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
     private Payment payment;
 }

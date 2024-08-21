@@ -16,6 +16,7 @@ public class ReservationRequestMapper {
                 .name(request.getClient().getName())
                 .email(request.getClient().getEmail())
                 .phoneNumber(request.getClient().getPhoneNumber())
+                .cpf(request.getClient().getCpf())
                 .build();
 
         PaymentDTO paymentDTO = null;

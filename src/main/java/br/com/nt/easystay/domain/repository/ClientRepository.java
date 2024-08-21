@@ -3,16 +3,18 @@ package br.com.nt.easystay.domain.repository;
 import br.com.nt.easystay.domain.model.Client;
 
 import java.util.List;
+import java.util.Optional;
+
 
 public interface ClientRepository {
 
-    Client findById(final String id);
+    Optional<Client> findById(final String id);
 
-    String save(final Client client);
+    Client save(final Client client);
 
     List<Client> findAll();
 
-    Client findByCpf(String cpf);
+    Optional<Client> findByCpf(String cpf);
 
     boolean existCpf(String cpf);
 

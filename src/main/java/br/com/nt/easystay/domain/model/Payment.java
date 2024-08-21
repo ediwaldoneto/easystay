@@ -17,11 +17,9 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_method", nullable = false)
     private PaymentMethod paymentMethod;
-
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
     @Column(name = "cardNumber")
@@ -30,7 +28,6 @@ public class Payment {
     private String cardExpiry;
     @Column(name = "cardCvc")
     private String cardCvc;
-
     @ManyToOne
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;

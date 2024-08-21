@@ -26,7 +26,7 @@ public class RoomController {
 
     @GetMapping("/all")
     public ResponseEntity<List<RoomResponse>> listAll() {
-        return new ResponseEntity<>(roomService.findAll(), HttpStatus.CREATED);
+        return new ResponseEntity<>(roomService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/available-room")
@@ -42,13 +42,13 @@ public class RoomController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         roomService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateStatus(@PathVariable Long id, @RequestParam boolean status) {
         roomService.update(id, status);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

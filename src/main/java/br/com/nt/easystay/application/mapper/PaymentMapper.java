@@ -31,7 +31,7 @@ public class PaymentMapper {
                 .build();
 
         final ReservationDTO reservation = ReservationDTO.builder()
-                .id(payment.getId())
+                .id(payment.getReservation().getId())
                 .status(payment.getReservation().getStatus().toString())
                 .checkInDate(payment.getReservation().getCheckInDate())
                 .checkOutDate(payment.getReservation().getCheckOutDate())
@@ -55,29 +55,33 @@ public class PaymentMapper {
     }
 
     public static Payment toEntity(PaymentDTO paymentDTO) {
+
         Client client = new Client();
-        client.setId(paymentDTO.getReservation().getClient().getId());
-        client.setName(paymentDTO.getReservation().getClient().getName());
-        client.setCpf(paymentDTO.getReservation().getClient().getCpf());
-        client.setEmail(paymentDTO.getReservation().getClient().getEmail());
-        client.setPhoneNumber(paymentDTO.getReservation().getClient().getPhoneNumber());
-
         Room room = new Room();
-        room.setId(paymentDTO.getReservation().getRoom().getId());
-        room.setNumber(paymentDTO.getReservation().getRoom().getNumber());
-        room.setRoomType(RoomType.valueOf(paymentDTO.getReservation().getRoom().getRoomType()));
-        room.setAvailable(paymentDTO.getReservation().getRoom().isAvailable());
-
         Reservation reservation = new Reservation();
-        reservation.setId(paymentDTO.getReservation().getId());
-        reservation.setStatus(ReservationStatus.fromString(paymentDTO.getReservation().getStatus()));
-        reservation.setCheckInDate(paymentDTO.getReservation().getCheckInDate());
-        reservation.setCheckOutDate(paymentDTO.getReservation().getCheckOutDate());
-        reservation.setPaymentTiming(PaymentTiming.valueOf(paymentDTO.getReservation().getPaymentTiming()));
-        reservation.setReservationNumber(paymentDTO.getReservation().getReservationNumber());
-        reservation.setClient(client);
-        reservation.setRoom(room);
+        if (paymentDTO.getReservation() != null) {
+            client.setId(paymentDTO.getReservation().getClient().getId());
+            client.setName(paymentDTO.getReservation().getClient().getName());
+            client.setCpf(paymentDTO.getReservation().getClient().getCpf());
+            client.setEmail(paymentDTO.getReservation().getClient().getEmail());
+            client.setPhoneNumber(paymentDTO.getReservation().getClient().getPhoneNumber());
 
+
+            room.setId(paymentDTO.getReservation().getRoom().getId());
+            room.setNumber(paymentDTO.getReservation().getRoom().getNumber());
+            room.setRoomType(RoomType.valueOf(paymentDTO.getReservation().getRoom().getRoomType()));
+            room.setAvailable(paymentDTO.getReservation().getRoom().isAvailable());
+
+
+            reservation.setId(paymentDTO.getReservation().getId());
+            reservation.setStatus(ReservationStatus.fromString(paymentDTO.getReservation().getStatus()));
+            reservation.setCheckInDate(paymentDTO.getReservation().getCheckInDate());
+            reservation.setCheckOutDate(paymentDTO.getReservation().getCheckOutDate());
+            reservation.setPaymentTiming(PaymentTiming.valueOf(paymentDTO.getReservation().getPaymentTiming()));
+            reservation.setReservationNumber(paymentDTO.getReservation().getReservationNumber());
+            reservation.setClient(client);
+            reservation.setRoom(room);
+        }
         Payment payment = new Payment();
         payment.setId(paymentDTO.getId());
         payment.setAmount(BigDecimal.valueOf(paymentDTO.getAmount()));

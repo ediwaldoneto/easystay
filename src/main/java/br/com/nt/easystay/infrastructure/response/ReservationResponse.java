@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ReservationResponse {
 
-    private Long id;
+    private String id;
     private LocalDateTime checkInDate;
     private LocalDateTime checkOutDate;
     private String status;

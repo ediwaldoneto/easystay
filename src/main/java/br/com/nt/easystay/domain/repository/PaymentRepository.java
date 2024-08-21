@@ -4,9 +4,10 @@ import br.com.nt.easystay.domain.model.Payment;
 
 import java.util.Optional;
 
+
 public interface PaymentRepository {
 
     Optional<Payment> locatePaymentByReservation(final String reservationId);
 
-    void updatePayment(Payment payment);
+    Payment updatePayment(Payment payment);
 }

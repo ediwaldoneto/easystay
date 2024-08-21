@@ -9,7 +9,7 @@ public interface ClientService {
 
     ClientResponse findById(final String id);
 
-    String save(final Client client);
+    Client save(final Client client);
 
     List<ClientResponse> findAll();
 

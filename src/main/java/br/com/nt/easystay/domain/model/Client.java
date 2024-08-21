@@ -1,13 +1,12 @@
 package br.com.nt.easystay.domain.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "Client")
@@ -28,4 +27,11 @@ public class Client {
     @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
+
+    @PrePersist
+    public void prePersist() {
+        if (id == null || id.isEmpty()) {
+            id = UUID.randomUUID().toString();
+        }
+    }
 }

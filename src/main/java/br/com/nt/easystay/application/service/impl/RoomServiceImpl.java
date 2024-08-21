@@ -1,11 +1,13 @@
 package br.com.nt.easystay.application.service.impl;
 
 import br.com.nt.easystay.application.mapper.RoomMapper;
+import br.com.nt.easystay.domain.exception.RoomNotFoundException;
 import br.com.nt.easystay.domain.model.Room;
 import br.com.nt.easystay.domain.repository.RoomRepository;
 import br.com.nt.easystay.domain.service.RoomService;
 import br.com.nt.easystay.infrastructure.mapper.request.RoomRequestMapper;
 import br.com.nt.easystay.infrastructure.mapper.response.RoomResponseMapper;
+import br.com.nt.easystay.infrastructure.repository.JpaRoomRepository;
 import br.com.nt.easystay.infrastructure.request.RoomRequest;
 import br.com.nt.easystay.infrastructure.response.RoomResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +23,10 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public RoomResponse findById(Long id) {
-        final Room room = roomRepository.findById(id);
-        return RoomResponseMapper.toRoomResponse(RoomMapper.toDTO(room));
+        return roomRepository.findById(id)
+                .map(RoomMapper::toDTO)
+                .map(RoomResponseMapper::toRoomResponse)
+                .orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
     }
 
     @Override
@@ -47,6 +51,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<RoomResponse> findAvailableRoom() {
         return roomRepository.findAvailableRoom().stream()
+                .filter(Room::isAvailable)
                 .map(RoomMapper::toDTO)
                 .map(RoomResponseMapper::toRoomResponse)
                 .toList();
@@ -54,7 +59,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void delete(Long id) {
-        roomRepository.delete(id);
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new RoomNotFoundException("Room not found with id: " + id));
+        roomRepository.delete(room);
     }
 
     @Override

@@ -53,8 +53,6 @@ public class ReservationMapper {
                 .room(room)
                 .payment(payment)
                 .build();
-
-
     }
 
     public static Reservation toEntity(ReservationDTO reservationDTO) {

@@ -18,4 +18,13 @@ public class ClientMapper {
         client.setPhoneNumber(dto.getPhoneNumber());
         return client;
     }
+
+    public static ClientDTO toDTO(Client client) {
+        return ClientDTO.builder()
+                .id(client.getId())
+                .cpf(client.getCpf())
+                .name(client.getName())
+                .email(client.getEmail())
+                .phoneNumber(client.getPhoneNumber()).build();
+    }
 }

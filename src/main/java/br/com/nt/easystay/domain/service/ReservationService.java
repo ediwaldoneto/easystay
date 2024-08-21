@@ -1,31 +1,37 @@
 package br.com.nt.easystay.domain.service;
 
+import br.com.nt.easystay.application.dto.ReservationDTO;
 import br.com.nt.easystay.domain.model.Reservation;
+import br.com.nt.easystay.domain.model.ReservationStatus;
 import br.com.nt.easystay.infrastructure.request.CheckOutRequest;
 import br.com.nt.easystay.infrastructure.request.CreateReservation;
+import br.com.nt.easystay.infrastructure.response.DetailsResponseReservation;
 import br.com.nt.easystay.infrastructure.response.ReservationResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservationService {
 
-    ReservationResponse findById(final Long id);
+    ReservationDTO findById(final String id);
 
-    void saveReservation(final Reservation reservation);
+    Reservation saveReservation(final Reservation reservation);
 
-    List<ReservationResponse> findAll();
+    List<ReservationDTO> findAll();
 
-    void delete(final Long id);
+    Optional<Reservation> findByReservationNumber(String reservationNumber);
+
+    void delete(final Reservation reservation);
 
     void update(final CreateReservation request);
 
-    ReservationResponse findReservationByCpfOrReservationNumber(final String cpf, final String reservationNumber);
+    ReservationResponse findByReservationNumberAndStatus(String reservationNumber, ReservationStatus status);
 
-    String createReservation(final CreateReservation request);
+    DetailsResponseReservation createReservation(final CreateReservation request);
 
-    String finalizeReservation(final CheckOutRequest request);
+    DetailsResponseReservation finalizeReservation(final CheckOutRequest request);
 
-    String confirmReservation(final String reservationNumber);
+    DetailsResponseReservation confirmReservation(final String reservationNumber);
 
-    String cancelReservation(final String reservationNumber);
+    DetailsResponseReservation cancelReservation(final String reservationNumber);
 }

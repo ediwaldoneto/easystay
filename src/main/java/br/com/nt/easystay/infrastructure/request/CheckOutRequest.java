@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class CheckOutRequest {
 
-    private String cpf;
     private String reservationNumber;
     private PaymentRequest payment;
 }

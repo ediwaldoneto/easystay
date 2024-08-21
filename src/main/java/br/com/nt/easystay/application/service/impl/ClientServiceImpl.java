@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
-
     private final ClientRepository clientRepository;
 
     @Override
@@ -23,7 +22,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public String save(Client client) {
+    public Client save(Client client) {
         return clientRepository.save(client);
     }
 
