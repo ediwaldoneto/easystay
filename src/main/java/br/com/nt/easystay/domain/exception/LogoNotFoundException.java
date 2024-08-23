@@ -4,21 +4,18 @@ import br.com.nt.easystay.infrastructure.excpetion.EasyStayException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
-public class BusinessException extends EasyStayException {
+public class LogoNotFoundException extends EasyStayException {
 
     private final String detail;
-    private final int statusCode;
 
-    public BusinessException(String detail, int statusCode) {
+    public LogoNotFoundException(String detail) {
         this.detail = detail;
-        this.statusCode = statusCode;
     }
+
 
     @Override
     public ProblemDetail problemDetail() {
-        HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
-        var pb = ProblemDetail.forStatus(httpStatus);
-        pb.setTitle("Business Exception");
+        var pb = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         pb.setDetail(detail);
         return pb;
     }
