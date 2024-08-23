@@ -4,18 +4,20 @@ import br.com.nt.easystay.infrastructure.excpetion.EasyStayException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
-public class RoomNotFoundException extends EasyStayException {
+public class BusinessException extends EasyStayException {
 
     private final String detail;
+    private final HttpStatus httpStatus;
 
-    public RoomNotFoundException(String detail) {
+    public BusinessException(String detail, HttpStatus httpStatus) {
         this.detail = detail;
+        this.httpStatus = httpStatus;
     }
 
     @Override
     public ProblemDetail problemDetail() {
-        var pb = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        pb.setTitle("Room not found");
+        var pb = ProblemDetail.forStatus(httpStatus);
+        pb.setTitle("Business Exception");
         pb.setDetail(detail);
         return pb;
     }

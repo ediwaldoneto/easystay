@@ -4,18 +4,18 @@ import br.com.nt.easystay.infrastructure.excpetion.EasyStayException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
-public class RoomNotFoundException extends EasyStayException {
+public class DuplicatePaymentException extends EasyStayException {
 
     private final String detail;
 
-    public RoomNotFoundException(String detail) {
+    public DuplicatePaymentException(String detail) {
         this.detail = detail;
     }
 
     @Override
     public ProblemDetail problemDetail() {
-        var pb = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        pb.setTitle("Room not found");
+        var pb = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+        pb.setTitle("Duplicate payment");
         pb.setDetail(detail);
         return pb;
     }

@@ -1,0 +1,27 @@
+package br.com.nt.easystay.application.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ReservationDTO {
+
+    private String id;
+    private LocalDateTime checkInDate;
+    private LocalDateTime checkOutDate;
+    private String status;
+    private String paymentTiming;
+    private String reservationNumber;
+    private ClientDTO client;
+    private RoomDTO room;
+    private PaymentDTO payment;
+
+}
+
