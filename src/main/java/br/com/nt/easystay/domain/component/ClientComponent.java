@@ -7,7 +7,6 @@ import br.com.nt.easystay.domain.model.Client;
 import br.com.nt.easystay.domain.repository.ClientRepository;
 import br.com.nt.easystay.infrastructure.mapper.request.ClientRequestMapper;
 import jakarta.transaction.Transactional;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -28,7 +27,7 @@ public class ClientComponent {
             return ClientMapper.toDTO(client.get());
         }
         if (clientRepository.existCpf(clientDTO.getEmail())) {
-            throw new BusinessException("Email already registered", HttpStatus.CONFLICT);
+            throw new BusinessException("Email already registered", 409);
         }
         Client newClient = ClientRequestMapper.toEntity(clientDTO);
         return ClientMapper.toDTO(clientRepository.save(newClient));

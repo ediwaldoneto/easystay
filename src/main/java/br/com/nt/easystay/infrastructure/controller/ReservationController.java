@@ -7,20 +7,20 @@ import br.com.nt.easystay.infrastructure.response.DetailsResponseReservation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
 @RequestMapping("/reservations")
 @RequiredArgsConstructor
-@Validated
 public class ReservationController {
 
     private final ReservationService reservationService;
 
     @PostMapping("/createReservation")
-    public ResponseEntity<DetailsResponseReservation> createReservation(@RequestBody CreateReservation request) {
+    public ResponseEntity<DetailsResponseReservation> createReservation(@Valid @RequestBody CreateReservation request) {
         return new ResponseEntity<>(reservationService.createReservation(request), HttpStatus.CREATED);
     }
 
