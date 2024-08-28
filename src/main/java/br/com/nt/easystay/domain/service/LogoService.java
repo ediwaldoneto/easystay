@@ -13,9 +13,13 @@ public interface LogoService {
 
     void updateFile(final String name, final MultipartFile file) throws IOException;
 
-    byte[] findById(final Integer id);
+    Logo findById(final Integer id);
 
-    byte[] findByName(final String name);
+    Logo findByName(final String name);
+
+    byte[] findByIdImage(final Integer id);
+
+    byte[] findByNameImage(final String name);
 
     List<LogoResponse> findAll();
 

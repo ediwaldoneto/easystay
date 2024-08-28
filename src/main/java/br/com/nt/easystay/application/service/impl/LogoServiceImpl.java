@@ -37,25 +37,34 @@ public class LogoServiceImpl implements LogoService {
 
     @Override
     public void updateFile(String name, MultipartFile file) throws IOException {
-        final Logo logo = logoRepository.findByName(name)
-                .orElseThrow(() -> new LogoNotFoundException("Logo not found with name" + name));
-        logo.setImage(file.getBytes());
+        final Logo logo = findByName(name);
 
+        logo.setImage(file.getBytes());
         logoRepository.save(logo);
     }
 
     @Override
-    public byte[] findById(Integer id) {
+    public Logo findById(Integer id) {
         return logoRepository.findById(id)
-                .orElseThrow(() -> new LogoNotFoundException("Logo not found with" + id)).getImage();
+                .orElseThrow(() -> new LogoNotFoundException("Logo not found with" + id));
     }
 
     @Override
-    public byte[] findByName(String name) {
+    public Logo findByName(String name) {
+        return logoRepository.findByName(name)
+                .orElseThrow(() -> new LogoNotFoundException("Logo not found with name" + name));
+    }
+
+    @Override
+    public byte[] findByIdImage(Integer id) {
+        return findById(id).getImage();
+    }
+
+    @Override
+    public byte[] findByNameImage(String name) {
         handleNonNullName(name);
 
-        return logoRepository.findByName(name)
-                .orElseThrow(() -> new LogoNotFoundException("Logo not found with name" + name)).getImage();
+        return findByName(name).getImage();
     }
 
     @Override
@@ -69,18 +78,13 @@ public class LogoServiceImpl implements LogoService {
     @Override
     public void delete(String name) {
         handleNonNullName(name);
-
-        final Logo logo = logoRepository.findByName(name)
-                .orElseThrow(() -> new LogoNotFoundException("Logo not found with name" + name));
+        final Logo logo = findByName(name);
         delete(logo);
     }
 
     @Override
     public void delete(Integer id) {
-
-        final Logo logo = logoRepository.findById(id)
-                .orElseThrow(() -> new LogoNotFoundException("Logo not found with" + id));
-
+        final Logo logo = findById(id);
         delete(logo);
     }
 

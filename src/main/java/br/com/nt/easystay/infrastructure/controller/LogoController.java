@@ -36,6 +36,7 @@ public class LogoController {
     @PutMapping(consumes = "multipart/form-data")
     public ResponseEntity<Void> updateUploadedFile(
             @RequestParam("name") String name,
+
             @RequestParam("file") MultipartFile file) throws IOException {
         logoService.updateFile(name, file);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -49,7 +50,7 @@ public class LogoController {
 
     @GetMapping("/download/{name}")
     public ResponseEntity<byte[]> downloadLogo(@PathVariable String name) {
-        byte[] image = logoService.findByName(name);
+        byte[] image = logoService.findByNameImage(name);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
